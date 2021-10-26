@@ -4,6 +4,8 @@ Author: truong360@gmail.com
 """
 import pandas as pd
 from datetime import datetime, timedelta 
+import time
+
 
 round_10min = pd.Timestamp.now().round('10min').to_pydatetime()
 ten_minute = timedelta(minutes=10)
