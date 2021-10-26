@@ -2,15 +2,15 @@
 This script should be run from the Python consol inside QGIS.
 Author: truong360@gmail.com
 """
+import pandas as pd
 from datetime import datetime, timedelta 
 
-def ceil_dt(dt, delta):
-    return dt + (datetime.min - dt) % delta
+round_10min = pd.Timestamp.now().round('10min').to_pydatetime()
+ten_minute = timedelta(minutes=10)
+last_10_minute = round_10min - ten_minute
+print(last_10_minute)
 
-last_10m_nearest = ceil_dt(now, timedelta(minutes=10))
-print(last_10m_nearest)
-
-unixtime = int(time.mktime(last_10m_nearest.timetuple()))
+unixtime = int(time.mktime(last_10_minute.timetuple()))
 print(unixtime)
 
 
@@ -22,7 +22,7 @@ sources.append(["connections-xyz","Radar ","","","",str_url,"","19","0"])
 # Add sources to browser
 for source in sources:
    connectionType = source[0]
-   connectionName = source[1] + str(last_10m_nearest)
+   connectionName = source[1] + str(last_10_minute)
    QSettings().setValue("qgis/%s/%s/authcfg" % (connectionType, connectionName), source[2])
    QSettings().setValue("qgis/%s/%s/password" % (connectionType, connectionName), source[3])
    QSettings().setValue("qgis/%s/%s/referer" % (connectionType, connectionName), source[4])
