@@ -1,5 +1,5 @@
 """
-This script should be run from the Python consol inside QGIS.
+This script should be run from the Python console inside QGIS.
 Author: truong360@gmail.com
 """
 import pandas as pd
